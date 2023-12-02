@@ -26,6 +26,8 @@ Beautiful UI and comprehensive features.
 
 ## Support
 
+Get help at [Wiki](https://github.com/XCSCN/SCForum/wiki "Wiki")
+
 If encountering problems or suggestions, please submit **Issues**.
 It will be repaired or updated within a reasonable time.
 
