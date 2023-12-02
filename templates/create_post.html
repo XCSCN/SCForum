@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>创建帖子</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        form {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    {% if success %}
+        <h1>帖子创建成功！</h1>
+    {% endif %}
+
+    <h2>创建帖子</h2>
+    <form action="/create_post" method="POST">
+        <label for="title">标题：</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="content">内容：</label><br>
+        <textarea id="content" name="content" required></textarea><br><br>
+
+        {% if session.username == 'xiaocai_mua' %}
+            <label for="is_pinned">是否置顶：</label>
+            <input type="checkbox" id="is_pinned" name="is_pinned"><br><br>
+        {% endif %}
+
+        <input type="submit" value="发布帖子">
+    </form>
+</body>
+</html>

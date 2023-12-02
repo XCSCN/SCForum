@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>论坛 - Powered by SCForum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .navbar {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 18px;
+        }
+
+        .post-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .post-author {
+            font-size: 16px;
+            color: #888888;
+            margin-bottom: 10px;
+        }
+
+        .post-content {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <h1>论坛</h1>
+
+        <!-- 导航栏 -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">主页</a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            {% if username %}
+                                <a class="nav-link" href="#">{{ username }}</a>
+                            {% else %}
+                                <a class="nav-link" href="#">匿名</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 内容 -->
+
+        <h2 class="mt-5">帖子列表</h2>
+        <ul class="list-group">
+            {% for post in posts %}
+                <li class="list-group-item">
+                    <div class="post-title">
+                        {% if post['is_pinned'] %}
+                            <span class="badge bg-success">置顶</span>
+                        {% endif %}
+                        {{ post['title'] }}
+                    </div>
+                    <div class="post-author">
+                        作者：{{ post['author'] }}
+                    </div>
+                    <div class="post-content">{{ post['content'] }}</div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+
+        <!-- 分页部分 -->
+        {% if total_pages > 1 %}
+            <nav aria-label="Page navigation">
+                <ul class="pagination mt-4 justify-content-center">
+                    {% if current_page != 1 %}
+                        <li class="page-item">
+                            <a class="page-link" href="/?page={{ current_page-1 }}">上一页</a>
+                        </li>
+                    {% endif %}
+                    {% for page_num in range(1, total_pages+1) %}
+                        {% if page_num == current_page %}
+                            <li class="page-item active">
+                                <a class="page-link" href="#">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="/?page={{ page_num }}">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if current_page != total_pages %}
+                        <li class="page-item">
+                            <a class="page-link" href="/?page={{ current_page+1 }}">下一页</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+
+        <h2 class="mt-5">创建帖子</h2>
+        <form class="mt-3" action="/create_post" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">标题：</label><br>
+                <input type="text" id="title" name="title" required class="form-control">
+            </div>
+        
+            <div class="mb-3">
+                <label for="content" class="form-label">内容：</label><br>
+                <textarea id="content" name="content" required class="form-control"></textarea>
+            </div>
+        
+            <input type="submit" value="发布帖子" class="btn btn-primary">
+        </form>
+
+        {% if username == 'xiaocai_mua' %}
+            <div class="text-center mt-5">
+                <a class="btn btn-danger" href="/admin">后台管理</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="text-center mt-5">
+        <p>SCForum v0.1-public</p>
+        <p>Powered by XCSCN</p>
+    </div>
+</body>
+</html>

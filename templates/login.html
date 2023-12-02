@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">登录</h1>
+
+        <form class="mt-5" action="/login" method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">用户名：</label>
+                <input type="text" id="username" name="username" required class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="登录" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
