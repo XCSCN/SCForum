@@ -9,7 +9,7 @@ Beautiful UI and comprehensive features.
 * **Topping function**
 * **User login**
 * **Management system**
-* **Pure Python**
+* **Python and HTML**
 * **Lightweight and fast**
 * **Can be quickly destroyed**
 * **Do not save any posts**
